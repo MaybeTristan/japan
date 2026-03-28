@@ -471,7 +471,7 @@
     <img class="flag-img"
          src="https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg"
          alt="Japan flag" />
-    <p>take a shot</p>
+    <p>take a shotttt 🥃</p>
   </div>
 
   <!-- Card -->
@@ -736,13 +736,15 @@
     btnEl.disabled    = true;
 
     try {
-      const res  = await fetch(WORKER + '/verify-pin', {
+      // /verify-pin is behind auth, so we use the public /login route
+      // with the owner username + PIN — if it succeeds, PIN is correct.
+      const res  = await fetch(WORKER + '/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pin })
+        body: JSON.stringify({ username: 'tristan', pin, remember: false })
       });
       const data = await res.json();
-      if (data.valid) {
+      if (data.success) {
         await remove(ref(db, 'rsvps'));
         localStorage.removeItem(LS_KEY);
         closeModal('resetModal');
