@@ -26,6 +26,7 @@
       --accent:    #c9b4e8;
       --divider:   #e0d9ce;
       --shadow:    rgba(0,0,0,0.07);
+      --danger:    #e07070;
     }
     [data-theme="dark"] {
       --bg:        #1a1814;
@@ -43,10 +44,10 @@
       --accent:    #6a4e8a;
       --divider:   #3a3630;
       --shadow:    rgba(0,0,0,0.3);
+      --danger:    #c46060;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -105,7 +106,7 @@
     .page {
       max-width: 520px;
       margin: 0 auto;
-      padding: 0 18px 60px;
+      padding: 0 18px 80px;
     }
 
     /* ── HEADER ── */
@@ -120,10 +121,18 @@
       letter-spacing: -0.5px;
       line-height: 1.2;
     }
+    .header .flag-img {
+      display: block;
+      margin: 12px auto 0;
+      width: 52px;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
     .header p {
       color: var(--text-sub);
       font-size: 13px;
-      margin-top: 6px;
+      margin-top: 12px;
     }
 
     /* ── MAIN CARD ── */
@@ -156,10 +165,7 @@
       transition: all 0.18s;
       font-family: 'Lexend', sans-serif;
     }
-    .rsvp-btn .icon {
-      font-size: 22px;
-      line-height: 1;
-    }
+    .rsvp-btn .icon { font-size: 22px; line-height: 1; }
     .rsvp-btn .label {
       font-size: 11px;
       font-weight: 500;
@@ -167,7 +173,6 @@
       letter-spacing: 0.3px;
     }
     .rsvp-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px var(--shadow); }
-
     .rsvp-btn.selected-yes   { border-color: var(--yes-dark);   background: var(--yes);   }
     .rsvp-btn.selected-maybe { border-color: var(--maybe-dark); background: var(--maybe); }
     .rsvp-btn.selected-no    { border-color: var(--no-dark);    background: var(--no);    }
@@ -227,7 +232,6 @@
       backdrop-filter: blur(3px);
     }
     .modal-overlay.open { display: flex; }
-
     .modal {
       background: var(--card);
       border: 1.5px solid var(--border);
@@ -242,17 +246,26 @@
       from { transform: scale(0.92) translateY(10px); opacity: 0; }
       to   { transform: scale(1) translateY(0);       opacity: 1; }
     }
+    .modal-icon {
+      display: block;
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 16px;
+      object-fit: contain;
+    }
     .modal h3 {
       font-family: 'Merriweather', serif;
       font-size: 1.05rem;
       margin-bottom: 8px;
       line-height: 1.4;
+      text-align: center;
     }
-    .modal p {
+    .modal > p {
       font-size: 13.5px;
       color: var(--text-sub);
       line-height: 1.6;
       margin-bottom: 20px;
+      text-align: center;
     }
     .modal-btns { display: flex; flex-direction: column; gap: 10px; }
     .modal-btn {
@@ -268,22 +281,50 @@
       cursor: pointer;
       transition: all 0.15s;
       text-align: left;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
     .modal-btn:hover { background: var(--border); }
     .modal-btn.primary {
       background: var(--text);
       color: var(--card);
       border-color: var(--text);
+      text-align: center;
     }
     .modal-btn.primary:hover { opacity: 0.85; }
     .modal-btn.danger {
-      border-color: var(--no-dark);
-      color: var(--no-dark);
+      border-color: var(--danger);
+      color: var(--danger);
+      text-align: center;
     }
     .modal-btn.danger:hover { background: var(--no); }
+    .modal-btn.center { text-align: center; }
+
+    /* ── PIN INPUT ── */
+    .pin-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+      font-family: 'Lexend', sans-serif;
+      font-size: 22px;
+      text-align: center;
+      letter-spacing: 8px;
+      outline: none;
+      margin-bottom: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pin-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+    .pin-error {
+      color: var(--danger);
+      font-size: 12.5px;
+      text-align: center;
+      margin-bottom: 14px;
+      min-height: 18px;
+    }
 
     /* ── DIVIDER ── */
     .divider {
@@ -312,9 +353,7 @@
       border-radius: 20px;
       padding: 2px 9px;
     }
-
     .rsvp-list { display: flex; flex-direction: column; gap: 10px; }
-
     .rsvp-item {
       display: flex;
       align-items: center;
@@ -327,7 +366,6 @@
       transition: box-shadow 0.15s;
     }
     .rsvp-item:hover { box-shadow: 0 2px 10px var(--shadow); }
-
     .rsvp-item .name {
       font-weight: 500;
       font-size: 15px;
@@ -337,11 +375,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .rsvp-item .badge {
-      font-size: 18px;
-      line-height: 1;
-      flex-shrink: 0;
-    }
+    .rsvp-item .badge { font-size: 18px; line-height: 1; flex-shrink: 0; }
     .rsvp-item .change-btn {
       font-family: 'Lexend', sans-serif;
       font-size: 11px;
@@ -355,22 +389,34 @@
       flex-shrink: 0;
     }
     .rsvp-item .change-btn:hover { color: var(--text); border-color: var(--text); }
-
     .rsvp-item.owned { border-color: var(--accent); }
 
-    /* Loading + empty states */
-    .list-empty {
+    .list-empty, .list-loading {
       text-align: center;
       color: var(--text-sub);
       font-size: 13px;
       padding: 24px 0;
     }
-    .list-loading {
+
+    /* ── RESET SECTION ── */
+    .reset-section {
       text-align: center;
-      color: var(--text-sub);
-      font-size: 13px;
-      padding: 24px 0;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1.5px solid var(--divider);
     }
+    .btn-reset {
+      font-family: 'Lexend', sans-serif;
+      font-size: 12px;
+      color: var(--text-sub);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-reset:hover { color: var(--danger); border-color: var(--danger); }
 
     /* ── TOAST ── */
     .toast {
@@ -395,9 +441,8 @@
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── ERROR ── */
     .error-msg {
-      color: var(--no-dark);
+      color: var(--danger);
       font-size: 12.5px;
       margin-top: 6px;
       margin-left: 4px;
@@ -412,7 +457,7 @@
   <span id="themeLabel">Dark</span>
 </button>
 
-<!-- Hero image -->
+<!-- Hero -->
 <div class="hero">
   <img src="https://avgtravels.com/au/wp-content/uploads/sites/4/Cherry-Blossoms-Japan-AVG-Travels-scaled.jpg"
        alt="Cherry blossoms in Japan" loading="eager" />
@@ -422,46 +467,37 @@
 
   <!-- Header -->
   <div class="header">
-    <h1>Japan 2027 RSVP 🇯🇵</h1>
+    <h1>Japan 2027 RSVP</h1>
+    <img class="flag-img"
+         src="https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg"
+         alt="Japan flag" />
     <p>Let us know if you're coming!</p>
   </div>
 
-  <!-- Main card -->
+  <!-- Card -->
   <div class="card">
-
-    <!-- RSVP selector -->
     <div class="rsvp-options">
-      <button class="rsvp-btn" id="btn-yes" onclick="selectRsvp('yes')">
-        <span class="icon">✅</span>
-        <span class="label">Yes</span>
+      <button class="rsvp-btn" data-rsvp="yes">
+        <span class="icon">✅</span><span class="label">Yes</span>
       </button>
-      <button class="rsvp-btn" id="btn-maybe" onclick="selectRsvp('maybe')">
-        <span class="icon">❓</span>
-        <span class="label">Maybe</span>
+      <button class="rsvp-btn" data-rsvp="maybe">
+        <span class="icon">❓</span><span class="label">Maybe</span>
       </button>
-      <button class="rsvp-btn" id="btn-no" onclick="selectRsvp('no')">
-        <span class="icon">❌</span>
-        <span class="label">No</span>
+      <button class="rsvp-btn" data-rsvp="no">
+        <span class="icon">❌</span><span class="label">No</span>
       </button>
     </div>
 
-    <!-- Name -->
     <div class="input-row">
       <input type="text" id="nameInput" placeholder="First name" maxlength="30"
              autocomplete="off" autocorrect="off" spellcheck="false" />
     </div>
     <div class="error-msg" id="errorMsg"></div>
-
-    <!-- Confirm -->
-    <button class="btn-confirm" id="confirmBtn" onclick="openShotModal()" style="margin-top:12px">
-      Confirm
-    </button>
+    <button class="btn-confirm" id="confirmBtn" style="margin-top:12px">Confirm</button>
   </div>
 
-  <!-- Divider -->
   <hr class="divider" />
 
-  <!-- RSVP list -->
   <div class="list-header">
     Responses <span class="list-count" id="listCount">0</span>
   </div>
@@ -469,245 +505,276 @@
     <div class="list-loading">Loading…</div>
   </div>
 
+  <div class="reset-section">
+    <button class="btn-reset" id="resetBtn">Reset All</button>
+  </div>
+
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- ════ MODALS ════ -->
-
-<!-- 1. Shot confirmation -->
+<!-- Modal: Shot -->
 <div class="modal-overlay" id="shotModal">
   <div class="modal">
-    <h3>🥃 To confirm, you must take a shot.</h3>
+    <img class="modal-icon"
+         src="https://cdn-icons-png.freepik.com/512/10310/10310615.png"
+         alt="shot glass" />
+    <h3>To confirm, you must take a shot.</h3>
     <p>Have you taken a shot?</p>
     <div class="modal-btns">
-      <button class="modal-btn primary" onclick="shotAnswer(true)">
-        &gt; Yes
-      </button>
-      <button class="modal-btn" onclick="shotAnswer(false)">
-        &gt; No
-      </button>
+      <button class="modal-btn primary" id="shotYes">&gt; Yes</button>
+      <button class="modal-btn center"  id="shotNo">&gt; No</button>
     </div>
   </div>
 </div>
 
-<!-- 2. Warning for non-owned entries -->
+<!-- Modal: Non-owned warning -->
 <div class="modal-overlay" id="warningModal">
   <div class="modal">
     <h3>⚠️ Not claimed from this device</h3>
-    <p>It looks like this item wasn't claimed from this device — we don't have a record of it here. If someone else claimed it, undoing this will free it up for others to grab.<br><br>Are you sure you'd like to proceed?</p>
+    <p>It looks like this item wasn't claimed from this device — we don't have a record of it here. If someone else claimed it, changing it will free it up for others to grab.<br><br>Are you sure you'd like to proceed?</p>
     <div class="modal-btns">
-      <button class="modal-btn danger" onclick="proceedChange()">Yes, proceed</button>
-      <button class="modal-btn" onclick="closeModal('warningModal')">Cancel</button>
+      <button class="modal-btn danger" id="warningProceed">Yes, proceed</button>
+      <button class="modal-btn center" id="warningCancel">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- 3. Change RSVP (owned) -->
+<!-- Modal: Pick new RSVP -->
 <div class="modal-overlay" id="changeModal">
   <div class="modal">
     <h3>Change RSVP for <span id="changeName"></span></h3>
     <p>Pick a new response:</p>
     <div class="modal-btns">
-      <button class="modal-btn" onclick="submitChange('yes')">✅ Yes</button>
-      <button class="modal-btn" onclick="submitChange('maybe')">❓ Maybe</button>
-      <button class="modal-btn" onclick="submitChange('no')">❌ No</button>
-      <button class="modal-btn" onclick="closeModal('changeModal')" style="color:var(--text-sub)">Cancel</button>
+      <button class="modal-btn" data-change="yes">✅ Yes</button>
+      <button class="modal-btn" data-change="maybe">❓ Maybe</button>
+      <button class="modal-btn" data-change="no">❌ No</button>
+      <button class="modal-btn center" id="changeCancel" style="color:var(--text-sub)">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- Firebase -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+<!-- Modal: Reset PIN -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal">
+    <h3>🔐 Admin Reset</h3>
+    <p>Enter the admin PIN to wipe all RSVPs.</p>
+    <input type="password" class="pin-input" id="pinInput"
+           placeholder="••••" maxlength="10" inputmode="numeric" />
+    <div class="pin-error" id="pinError"></div>
+    <div class="modal-btns">
+      <button class="modal-btn danger" id="pinConfirm">Reset All RSVPs</button>
+      <button class="modal-btn center" id="pinCancel">Cancel</button>
+    </div>
+  </div>
+</div>
 
-  const firebaseConfig = {
+<script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, remove, onValue, get }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  // ── Firebase ──────────────────────────────────────────────────────────────
+  const app = initializeApp({
     apiKey: "AIzaSyDn1GezuRIDdigeesQUnHFecaNP_bYk5m0",
     authDomain: "rsvpdatabase.firebaseapp.com",
     databaseURL: "https://rsvpdatabase-default-rtdb.firebaseio.com",
     projectId: "rsvpdatabase",
     storageBucket: "rsvpdatabase.firebasestorage.app",
-    messagingSenderId: "771775187477",
+    messagingSenderId: "771775187447",
     appId: "1:771775187477:web:f7d72e1ba19d162b6e5c1c",
     measurementId: "G-VWHW533LTF"
-  };
+  });
+  const db = getDatabase(app);
+  const WORKER = 'https://claude-proxy.tristanarbet.workers.dev';
 
-  const app = initializeApp(firebaseConfig);
-  const db  = getDatabase(app);
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  const LS_KEY = 'japan2027_owned';
+  const norm   = s => s.trim().toLowerCase();
+  const esc    = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const ICONS  = { yes:'✅', maybe:'❓', no:'❌' };
 
-  // ── STATE ──
+  function getOwned()    { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { return {}; } }
+  function addOwned(n)   { const o = getOwned(); o[norm(n)] = true; localStorage.setItem(LS_KEY, JSON.stringify(o)); }
+  function isOwned(n)    { return !!getOwned()[norm(n)]; }
+
+  // ── Modal helpers ─────────────────────────────────────────────────────────
+  const openModal  = id => document.getElementById(id).classList.add('open');
+  const closeModal = id => document.getElementById(id).classList.remove('open');
+  document.querySelectorAll('.modal-overlay').forEach(el =>
+    el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); })
+  );
+
+  // ── Toast ─────────────────────────────────────────────────────────────────
+  let toastT;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // ── State ─────────────────────────────────────────────────────────────────
   let selectedRsvp  = null;
   let pendingChange = null; // { key, name }
-  const LS_KEY = 'japan2027_owned'; // { normalizedName: true }
 
-  function getOwned() {
-    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch { return {}; }
-  }
-  function addOwned(name) {
-    const o = getOwned();
-    o[norm(name)] = true;
-    localStorage.setItem(LS_KEY, JSON.stringify(o));
-  }
-  function isOwned(name) { return !!getOwned()[norm(name)]; }
-  function norm(s) { return s.trim().toLowerCase(); }
-
-  // ── EXPOSE GLOBALS ──
-  window.selectRsvp = (v) => {
-    selectedRsvp = v;
-    ['yes','maybe','no'].forEach(x => {
-      document.getElementById('btn-'+x).className =
-        'rsvp-btn' + (x === v ? ' selected-'+x : '');
+  // ── RSVP buttons ──────────────────────────────────────────────────────────
+  document.querySelectorAll('.rsvp-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedRsvp = btn.dataset.rsvp;
+      document.querySelectorAll('.rsvp-btn').forEach(b =>
+        b.className = 'rsvp-btn' + (b === btn ? ' selected-' + selectedRsvp : '')
+      );
+      document.getElementById('errorMsg').textContent = '';
     });
-    document.getElementById('errorMsg').textContent = '';
-  };
+  });
 
-  window.openShotModal = () => {
+  // ── Confirm → shot modal ──────────────────────────────────────────────────
+  document.getElementById('confirmBtn').addEventListener('click', () => {
     const name = document.getElementById('nameInput').value.trim();
-    if (!name) { document.getElementById('errorMsg').textContent = 'Please enter your first name.'; return; }
+    if (!name)         { document.getElementById('errorMsg').textContent = 'Please enter your first name.'; return; }
     if (!selectedRsvp) { document.getElementById('errorMsg').textContent = 'Please select an option above.'; return; }
     document.getElementById('errorMsg').textContent = '';
     openModal('shotModal');
-  };
+  });
 
-  window.shotAnswer = (yes) => {
-    closeModal('shotModal');
-    if (yes) {
-      submitRsvp();
-    } else {
-      showToast("No shot, no RSVP 🥃");
-    }
-  };
+  // ── Shot modal ────────────────────────────────────────────────────────────
+  document.getElementById('shotYes').addEventListener('click', () => { closeModal('shotModal'); submitRsvp(); });
+  document.getElementById('shotNo').addEventListener('click',  () => { closeModal('shotModal'); showToast("No shot, no RSVP 🥃"); });
 
   async function submitRsvp() {
     const name = document.getElementById('nameInput').value.trim();
     const key  = norm(name);
-
-    // Check if exists already
     const snap = await get(ref(db, 'rsvps/' + key));
-    if (snap.exists()) {
-      showToast(`${name} has already RSVP'd!`);
-      return;
-    }
-
-    const now = new Date().toISOString();
-    await set(ref(db, 'rsvps/' + key), {
-      name: name,
-      rsvp: selectedRsvp,
-      date: now
-    });
-
+    if (snap.exists()) { showToast(`${name} has already RSVP'd!`); return; }
+    await set(ref(db, 'rsvps/' + key), { name, rsvp: selectedRsvp, date: new Date().toISOString() });
     addOwned(name);
     document.getElementById('nameInput').value = '';
     selectedRsvp = null;
-    ['yes','maybe','no'].forEach(x => {
-      document.getElementById('btn-'+x).className = 'rsvp-btn';
-    });
+    document.querySelectorAll('.rsvp-btn').forEach(b => b.className = 'rsvp-btn');
     showToast('RSVP saved! 🎉');
   }
 
-  // ── CHANGE FLOW ──
-  window.startChange = (key, name) => {
-    pendingChange = { key, name };
-    if (isOwned(name)) {
-      document.getElementById('changeName').textContent = name;
+  // ── Change flow — event delegation (fixes the broken onClick bug) ─────────
+  document.getElementById('rsvpList').addEventListener('click', e => {
+    const btn = e.target.closest('.change-btn');
+    if (!btn) return;
+    pendingChange = { key: btn.dataset.key, name: btn.dataset.name };
+    if (isOwned(pendingChange.name)) {
+      document.getElementById('changeName').textContent = pendingChange.name;
       openModal('changeModal');
     } else {
       openModal('warningModal');
     }
-  };
+  });
 
-  window.proceedChange = () => {
+  document.getElementById('warningProceed').addEventListener('click', () => {
     closeModal('warningModal');
     document.getElementById('changeName').textContent = pendingChange.name;
     openModal('changeModal');
-  };
+  });
+  document.getElementById('warningCancel').addEventListener('click', () => closeModal('warningModal'));
 
-  window.submitChange = async (newRsvp) => {
+  document.getElementById('changeModal').addEventListener('click', async e => {
+    const btn = e.target.closest('[data-change]');
+    if (!btn) return;
+    const newRsvp = btn.dataset.change;
     closeModal('changeModal');
     if (!pendingChange) return;
     const { key, name } = pendingChange;
+    pendingChange = null;
     const snap = await get(ref(db, 'rsvps/' + key));
     if (!snap.exists()) { showToast('Entry not found.'); return; }
-    const existing = snap.val();
-    await set(ref(db, 'rsvps/' + key), { ...existing, rsvp: newRsvp });
+    await set(ref(db, 'rsvps/' + key), { ...snap.val(), rsvp: newRsvp });
     addOwned(name);
-    pendingChange = null;
     showToast('RSVP updated! ✨');
-  };
+  });
+  document.getElementById('changeCancel').addEventListener('click', () => closeModal('changeModal'));
 
-  // ── REALTIME LIST ──
-  const listEl   = document.getElementById('rsvpList');
-  const countEl  = document.getElementById('listCount');
-  const ICONS = { yes: '✅', maybe: '❓', no: '❌' };
+  // ── Live list ─────────────────────────────────────────────────────────────
+  onValue(ref(db, 'rsvps'), snap => {
+    const data    = snap.val() || {};
+    const entries = Object.entries(data).sort((a, b) => (a[1].date||'') < (b[1].date||'') ? 1 : -1);
+    document.getElementById('listCount').textContent = entries.length;
 
-  onValue(ref(db, 'rsvps'), (snap) => {
-    const data = snap.val() || {};
-    const entries = Object.entries(data).sort((a,b) => {
-      const ta = a[1].date || '';
-      const tb = b[1].date || '';
-      return ta < tb ? 1 : -1;
-    });
-
-    countEl.textContent = entries.length;
-
-    if (entries.length === 0) {
-      listEl.innerHTML = '<div class="list-empty">No responses yet — be the first! 🌸</div>';
+    if (!entries.length) {
+      document.getElementById('rsvpList').innerHTML =
+        '<div class="list-empty">No responses yet — be the first! 🌸</div>';
       return;
     }
 
-    listEl.innerHTML = entries.map(([key, val]) => {
-      const owned = isOwned(val.name);
-      return `
-        <div class="rsvp-item${owned ? ' owned' : ''}">
-          <span class="name">${escHtml(val.name)}</span>
-          <span class="badge">${ICONS[val.rsvp] || '❓'}</span>
-          <button class="change-btn" onclick="startChange(${JSON.stringify(key)}, ${JSON.stringify(val.name)})">Change</button>
-        </div>`;
-    }).join('');
+    // Use data-key / data-name attributes; event delegation handles clicks
+    document.getElementById('rsvpList').innerHTML = entries.map(([key, val]) => `
+      <div class="rsvp-item${isOwned(val.name) ? ' owned' : ''}">
+        <span class="name">${esc(val.name)}</span>
+        <span class="badge">${ICONS[val.rsvp] || '❓'}</span>
+        <button class="change-btn" data-key="${esc(key)}" data-name="${esc(val.name)}">Change</button>
+      </div>`).join('');
   });
 
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // ── MODALS ──
-  window.openModal  = (id) => document.getElementById(id).classList.add('open');
-  window.closeModal = (id) => document.getElementById(id).classList.remove('open');
-
-  // Close on overlay click
-  document.querySelectorAll('.modal-overlay').forEach(el => {
-    el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+  // ── Reset All ─────────────────────────────────────────────────────────────
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    document.getElementById('pinInput').value = '';
+    document.getElementById('pinError').textContent = '';
+    openModal('resetModal');
+    setTimeout(() => document.getElementById('pinInput').focus(), 120);
+  });
+  document.getElementById('pinCancel').addEventListener('click', () => closeModal('resetModal'));
+  document.getElementById('pinInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('pinConfirm').click();
   });
 
-  // ── TOAST ──
-  let toastTimer;
-  window.showToast = (msg) => {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
-  };
+  document.getElementById('pinConfirm').addEventListener('click', async () => {
+    const pin     = document.getElementById('pinInput').value.trim();
+    const errEl   = document.getElementById('pinError');
+    const btnEl   = document.getElementById('pinConfirm');
+    if (!pin) { errEl.textContent = 'Please enter the PIN.'; return; }
+    errEl.textContent = '';
+    btnEl.textContent = 'Verifying…';
+    btnEl.disabled    = true;
 
-  // ── THEME ──
-  const savedTheme = localStorage.getItem('japan2027_theme') || 'light';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  updateThemeBtn(savedTheme);
-
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('data-theme');
-    const next = cur === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('japan2027_theme', next);
-    updateThemeBtn(next);
+    try {
+      const res  = await fetch(WORKER + '/verify-pin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin })
+      });
+      const data = await res.json();
+      if (data.valid) {
+        await remove(ref(db, 'rsvps'));
+        localStorage.removeItem(LS_KEY);
+        closeModal('resetModal');
+        showToast('All RSVPs have been reset 🗑️');
+      } else {
+        errEl.textContent = 'Incorrect PIN. Try again.';
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+      }
+    } catch {
+      errEl.textContent = 'Could not reach server. Try again.';
+    } finally {
+      btnEl.textContent = 'Reset All RSVPs';
+      btnEl.disabled    = false;
+    }
   });
 
-  function updateThemeBtn(theme) {
-    document.getElementById('themeIcon').textContent  = theme === 'dark' ? '☀️' : '🌙';
-    document.getElementById('themeLabel').textContent = theme === 'dark' ? 'Light' : 'Dark';
-  }
+  // ── Theme ─────────────────────────────────────────────────────────────────
+  (function() {
+    const saved = localStorage.getItem('japan2027_theme') || 'light';
+    apply(saved);
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      localStorage.setItem('japan2027_theme', next);
+      apply(next);
+    });
+    function apply(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.getElementById('themeIcon').textContent  = t === 'dark' ? '☀️' : '🌙';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? 'Light' : 'Dark';
+    }
+  })();
 </script>
 
 </body>
